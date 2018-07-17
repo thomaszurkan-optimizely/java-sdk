@@ -609,8 +609,8 @@ object ProjectConfigTestUtils {
                 assertThat(actualLiveVariable.id, `is`(expectedLiveVariable.id))
                 assertThat(actualLiveVariable.key, `is`(expectedLiveVariable.key))
                 assertThat(actualLiveVariable.defaultValue, `is`(expectedLiveVariable.defaultValue))
-                assertThat<VariableType>(actualLiveVariable.type, `is`<VariableType>(expectedLiveVariable.type))
-                assertThat<VariableStatus>(actualLiveVariable.status, `is`<VariableStatus>(expectedLiveVariable.status))
+                assertThat<LiveVariable.VariableType>(actualLiveVariable.type, `is`<LiveVariable.VariableType>(expectedLiveVariable.type))
+                assertThat<LiveVariable.VariableStatus>(actualLiveVariable.status, `is`<LiveVariable.VariableStatus>(expectedLiveVariable.status))
             }
         }
     }

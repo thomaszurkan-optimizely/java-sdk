@@ -39,7 +39,7 @@ import org.mockito.Mockito.`when`
 @SuppressFBWarnings(value = "RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT", justification = "mockito verify calls do have a side-effect")
 class AudienceConditionEvaluationTest {
 
-    internal var testUserAttributes: MutableMap<String, String>
+    internal var testUserAttributes: MutableMap<String, String> = HashMap<String,String>()
 
     @Before
     fun initialize() {

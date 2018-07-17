@@ -158,12 +158,12 @@ class ExperimentUtilsTest {
         val attributesWithNull = Collections.singletonMap<String, String>(ATTRIBUTE_NATIONALITY_KEY, null)
         val nonMatchingMap = Collections.singletonMap(ATTRIBUTE_NATIONALITY_KEY, "American")
 
-        assertTrue(isUserInExperiment(v4ProjectConfig!!, experiment, satisfiesFirstCondition))
-        assertTrue(isUserInExperiment(v4ProjectConfig!!, experiment, attributesWithNull))
-        assertFalse(isUserInExperiment(v4ProjectConfig!!, experiment, nonMatchingMap))
+        assertTrue(isUserInExperiment(v4ProjectConfig!!, experiment!!, satisfiesFirstCondition))
+        assertTrue(isUserInExperiment(v4ProjectConfig!!, experiment!!, attributesWithNull))
+        assertFalse(isUserInExperiment(v4ProjectConfig!!, experiment!!, nonMatchingMap))
 
         // It should explicitly be set to null otherwise we will return false on empty maps
-        assertFalse(isUserInExperiment(v4ProjectConfig!!, experiment, emptyMap<String, String>()))
+        assertFalse(isUserInExperiment(v4ProjectConfig!!, experiment!!, emptyMap<String, String>()))
     }
 
     /**

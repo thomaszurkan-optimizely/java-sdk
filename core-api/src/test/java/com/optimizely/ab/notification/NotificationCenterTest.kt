@@ -32,7 +32,7 @@ class NotificationCenterTest {
 
     @Test
     fun testAddWrongTrackNotificationListener() {
-        val notificationId = notificationCenter!!.addNotificationListener(NotificationCenter.NotificationType.Activate, trackNotification)
+        val notificationId = notificationCenter!!.addNotificationListener(NotificationCenter.NotificationType.Activate, trackNotification!!)
         logbackVerifier.expectMessage(Level.WARN, "Notification listener was the wrong type. It was not added to the notification center.")
         assertEquals(notificationId.toLong(), -1)
         assertFalse(notificationCenter!!.removeNotificationListener(notificationId))
@@ -41,7 +41,7 @@ class NotificationCenterTest {
 
     @Test
     fun testAddWrongActivateNotificationListener() {
-        val notificationId = notificationCenter!!.addNotificationListener(NotificationCenter.NotificationType.Track, activateNotification)
+        val notificationId = notificationCenter!!.addNotificationListener(NotificationCenter.NotificationType.Track, activateNotification!!)
         logbackVerifier.expectMessage(Level.WARN, "Notification listener was the wrong type. It was not added to the notification center.")
         assertEquals(notificationId.toLong(), -1)
         assertFalse(notificationCenter!!.removeNotificationListener(notificationId))
@@ -64,6 +64,7 @@ class NotificationCenterTest {
 
     @Test
     fun testAddActivateNotification() {
+
         val notificationId = notificationCenter!!.addActivateNotificationListener { experiment, userId, attributes, variation, event -> }
         assertNotSame(notificationId, -1)
         assertTrue(notificationCenter!!.removeNotificationListener(notificationId))

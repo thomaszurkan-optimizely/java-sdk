@@ -19,7 +19,6 @@ package com.optimizely.ab.notification
 import com.optimizely.ab.config.Experiment
 import com.optimizely.ab.config.Variation
 import com.optimizely.ab.event.LogEvent
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.util.ArrayList
 import java.util.HashMap
@@ -65,13 +64,13 @@ class NotificationCenter {
      * @param activateNotificationListenerInterface
      * @return greater than zero if added.
      */
-    fun addActivateNotificationListener(activateNotificationListenerInterface: ActivateNotificationListenerInterface): Int {
+    fun addActivateNotificationListener(activateNotificationListenerInterface: (Any, Any, Any, Any, Any) -> Unit): Int {
         return if (activateNotificationListenerInterface is ActivateNotificationListener) {
             addNotificationListener(NotificationType.Activate, activateNotificationListenerInterface as NotificationListener)
         } else {
             addNotificationListener(NotificationType.Activate, object : ActivateNotificationListener() {
                 override fun onActivate(experiment: Experiment, userId: String, attributes: Map<String, String>, variation: Variation, event: LogEvent) {
-                    activateNotificationListenerInterface.onActivate(experiment, userId, attributes, variation, event)
+                    activateNotificationListenerInterface(experiment, userId, attributes, variation, event)
                 }
             })
         }
@@ -82,13 +81,13 @@ class NotificationCenter {
      * @param trackNotificationListenerInterface
      * @return greater than zero if added.
      */
-    fun addTrackNotificationListener(trackNotificationListenerInterface: TrackNotificationListenerInterface): Int {
+    fun addTrackNotificationListener(trackNotificationListenerInterface: (Any, Any, Any, Any, Any) -> Unit): Int {
         return if (trackNotificationListenerInterface is TrackNotificationListener) {
             addNotificationListener(NotificationType.Activate, trackNotificationListenerInterface as NotificationListener)
         } else {
             addNotificationListener(NotificationType.Track, object : TrackNotificationListener() {
                 override fun onTrack(eventKey: String, userId: String, attributes: Map<String, String>, eventTags: Map<String, *>, event: LogEvent) {
-                    trackNotificationListenerInterface.onTrack(eventKey, userId, attributes, eventTags, event)
+                    trackNotificationListenerInterface(eventKey, userId, attributes, eventTags, event)
                 }
             })
         }

@@ -96,7 +96,7 @@ class DecisionServiceTest {
     @Test
     @Throws(Exception::class)
     fun getVariationWhitelistedPrecedesAudienceEval() {
-        val bucketer = spy(Bucketer(validProjectConfig))
+        val bucketer = spy(Bucketer(validProjectConfig!!))
         val decisionService = spy(DecisionService(bucketer, mockErrorHandler!!, validProjectConfig!!, null))
         val experiment = validProjectConfig!!.experiments[0]
         val expectedVariation = experiment.variations[0]
@@ -120,7 +120,7 @@ class DecisionServiceTest {
     @Test
     @Throws(Exception::class)
     fun getForcedVariationBeforeWhitelisting() {
-        val bucketer = Bucketer(validProjectConfig)
+        val bucketer = Bucketer(validProjectConfig!!)
         val decisionService = spy(DecisionService(bucketer, mockErrorHandler!!, validProjectConfig!!, null))
         val experiment = validProjectConfig!!.experiments[0]
         val whitelistVariation = experiment.variations[0]
@@ -151,7 +151,7 @@ class DecisionServiceTest {
     @Test
     @Throws(Exception::class)
     fun getVariationForcedPrecedesAudienceEval() {
-        val bucketer = spy(Bucketer(validProjectConfig))
+        val bucketer = spy(Bucketer(validProjectConfig!!))
         val decisionService = spy(DecisionService(bucketer, mockErrorHandler!!, validProjectConfig!!, null))
         val experiment = validProjectConfig!!.experiments[0]
         val expectedVariation = experiment.variations[1]
@@ -180,7 +180,7 @@ class DecisionServiceTest {
     fun getVariationForcedBeforeUserProfile() {
         val experiment = validProjectConfig!!.experiments[0]
         val variation = experiment.variations[0]
-        val bucketer = spy(Bucketer(validProjectConfig))
+        val bucketer = spy(Bucketer(validProjectConfig!!))
         val decision = Decision(variation.id)
         val userProfile = UserProfile(userProfileId,
                 Collections.singletonMap(experiment.id, decision))
@@ -220,7 +220,7 @@ class DecisionServiceTest {
     fun getVariationEvaluatesUserProfileBeforeAudienceTargeting() {
         val experiment = validProjectConfig!!.experiments[0]
         val variation = experiment.variations[0]
-        val bucketer = spy(Bucketer(validProjectConfig))
+        val bucketer = spy(Bucketer(validProjectConfig!!))
         val decision = Decision(variation.id)
         val userProfile = UserProfile(userProfileId,
                 Collections.singletonMap(experiment.id, decision))
@@ -254,7 +254,7 @@ class DecisionServiceTest {
         val experiment = validProjectConfig!!.experiments[1]
         assertFalse(experiment.isRunning)
         val variation = experiment.variations[0]
-        val bucketer = Bucketer(validProjectConfig)
+        val bucketer = Bucketer(validProjectConfig!!)
 
         val decisionService = spy(DecisionService(bucketer,
                 mockErrorHandler!!, validProjectConfig!!, null))
@@ -418,8 +418,8 @@ class DecisionServiceTest {
         val featureExperiment = v4ProjectConfig!!.experimentIdMapping[featureFlag.experimentIds[0]]
         assertNotNull(featureExperiment)
         val featureRollout = v4ProjectConfig!!.rolloutIdMapping[featureFlag.rolloutId]
-        val experimentVariation = featureExperiment.variations[0]
-        val rolloutExperiment = featureRollout.experiments[0]
+        val experimentVariation = featureExperiment!!.variations[0]
+        val rolloutExperiment = featureRollout!!.experiments[0]
         val rolloutVariation = rolloutExperiment.variations[0]
 
         val decisionService = spy(DecisionService(
@@ -481,8 +481,8 @@ class DecisionServiceTest {
         val featureExperiment = v4ProjectConfig!!.experimentIdMapping[featureFlag.experimentIds[0]]
         assertNotNull(featureExperiment)
         val featureRollout = v4ProjectConfig!!.rolloutIdMapping[featureFlag.rolloutId]
-        val rolloutExperiment = featureRollout.experiments[0]
-        val rolloutVariation = rolloutExperiment.variations[0]
+        val rolloutExperiment = featureRollout!!.experiments[0]
+        val rolloutVariation = rolloutExperiment!!.variations[0]
 
         val decisionService = spy(DecisionService(
                 mock(Bucketer::class.java),
@@ -785,7 +785,7 @@ class DecisionServiceTest {
      */
     @Test
     fun getWhitelistedReturnsForcedVariation() {
-        val bucketer = Bucketer(validProjectConfig)
+        val bucketer = Bucketer(validProjectConfig!!)
         val decisionService = DecisionService(bucketer, mockErrorHandler!!, validProjectConfig!!, null)
 
         logbackVerifier.expectMessage(Level.INFO, "User \"" + whitelistedUserId + "\" is forced in variation \""
@@ -803,7 +803,7 @@ class DecisionServiceTest {
         val userId = "testUser1"
         val invalidVariationKey = "invalidVarKey"
 
-        val bucketer = Bucketer(validProjectConfig)
+        val bucketer = Bucketer(validProjectConfig!!)
         val decisionService = DecisionService(bucketer, mockErrorHandler!!, validProjectConfig!!, null)
 
         val variations = listOf<Variation>(Variation("1", "var1"))
@@ -828,7 +828,7 @@ class DecisionServiceTest {
     @Test
     @Throws(Exception::class)
     fun getWhitelistedReturnsNullWhenUserIsNotWhitelisted() {
-        val bucketer = Bucketer(validProjectConfig)
+        val bucketer = Bucketer(validProjectConfig!!)
         val decisionService = DecisionService(bucketer, mockErrorHandler!!, validProjectConfig!!, null)
 
         assertNull(decisionService.getWhitelistedVariation(whitelistedExperiment!!, genericUserId))
@@ -853,7 +853,7 @@ class DecisionServiceTest {
         val userProfileService = mock<UserProfileService>(UserProfileService::class.java)
         `when`(userProfileService.lookup(userProfileId)).thenReturn(userProfile.toMap())
 
-        val bucketer = Bucketer(noAudienceProjectConfig)
+        val bucketer = Bucketer(noAudienceProjectConfig!!)
         val decisionService = DecisionService(bucketer,
                 mockErrorHandler!!,
                 noAudienceProjectConfig!!,
@@ -879,10 +879,10 @@ class DecisionServiceTest {
     fun getStoredVariationLogsWhenLookupReturnsNull() {
         val experiment = noAudienceProjectConfig!!.experiments[0]
 
-        val bucketer = Bucketer(noAudienceProjectConfig)
+        val bucketer = Bucketer(noAudienceProjectConfig!!)
         val userProfileService = mock<UserProfileService>(UserProfileService::class.java)
         val userProfile = UserProfile(userProfileId,
-                emptyMap<String, Decision>())
+                HashMap<String, Decision>())
         `when`(userProfileService.lookup(userProfileId)).thenReturn(userProfile.toMap())
 
         val decisionService = DecisionService(bucketer,
@@ -968,7 +968,7 @@ class DecisionServiceTest {
         val experiment = noAudienceProjectConfig!!.experiments[0]
         val variation = experiment.variations[0]
         val decision = Decision(variation.id)
-        val bucketer = Bucketer(noAudienceProjectConfig)
+        val bucketer = Bucketer(noAudienceProjectConfig!!)
         val userProfileService = mock<UserProfileService>(UserProfileService::class.java)
         doThrow(Exception()).`when`(userProfileService).save(anyMapOf(String::class.java, Any::class.java))
 

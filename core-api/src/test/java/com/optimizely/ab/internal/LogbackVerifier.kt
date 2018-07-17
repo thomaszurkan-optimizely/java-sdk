@@ -47,7 +47,12 @@ class LogbackVerifier : TestRule {
     }
 
     @JvmOverloads
-    fun expectMessage(level: Level, msg: String = "", throwableClass: Class<out Throwable> = null) {
+    fun expectMessage(level: Level, msg: String = "", throwableClass: Class<out Throwable>) {
+        expectMessage(level, msg, null, times(1))
+    }
+
+    @JvmOverloads
+    fun expectMessage(level: Level, msg: String = "") {
         expectMessage(level, msg, null, times(1))
     }
 
@@ -83,12 +88,12 @@ class LogbackVerifier : TestRule {
         (LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME) as Logger).detachAppender(appender)
     }
 
-    private class ExpectedLogEvent private constructor(private val level: Level,
+    private class ExpectedLogEvent constructor(private val level: Level,
                                                        private val message: String,
                                                        private val throwableClass: Class<out Throwable>?,
-                                                       private val times: VerificationMode) {
+                                                       public val times: VerificationMode) {
 
-        private fun matches(actual: ILoggingEvent): Boolean {
+        public fun matches(actual: ILoggingEvent): Boolean {
             var match = actual.formattedMessage.contains(message)
             match = match and (actual.level == level)
             match = match and matchThrowables(actual)

@@ -41,6 +41,7 @@ import com.optimizely.ab.config.ProjectConfigTestUtils.validConfigJsonV2
 import com.optimizely.ab.config.ProjectConfigTestUtils.validConfigJsonV3
 import com.optimizely.ab.config.ProjectConfigTestUtils.validProjectConfigV2
 import com.optimizely.ab.config.ProjectConfigTestUtils.validProjectConfigV3
+import com.optimizely.ab.event.internal.payload.EventBatch
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertThat
@@ -93,7 +94,7 @@ class OptimizelyBuilderTest {
     @Throws(Exception::class)
     fun withErrorHandler() {
         val optimizelyClient = Optimizely.builder(validConfigJsonV2(), mockEventHandler!!)
-                .withErrorHandler(mockErrorHandler)
+                .withErrorHandler(mockErrorHandler!!)
                 .build()
 
         assertThat(optimizelyClient.errorHandler, `is`<ErrorHandler>(mockErrorHandler))
