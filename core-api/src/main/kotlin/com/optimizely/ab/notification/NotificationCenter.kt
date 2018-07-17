@@ -64,7 +64,7 @@ class NotificationCenter {
      * @param activateNotificationListenerInterface
      * @return greater than zero if added.
      */
-    fun addActivateNotificationListener(activateNotificationListenerInterface: (Any, Any, Any, Any, Any) -> Unit): Int {
+    fun addActivateNotificationListener(activateNotificationListenerInterface: (Experiment, String, Map<String,String>, Variation, LogEvent) -> Unit): Int {
         return if (activateNotificationListenerInterface is ActivateNotificationListener) {
             addNotificationListener(NotificationType.Activate, activateNotificationListenerInterface as NotificationListener)
         } else {
@@ -81,7 +81,7 @@ class NotificationCenter {
      * @param trackNotificationListenerInterface
      * @return greater than zero if added.
      */
-    fun addTrackNotificationListener(trackNotificationListenerInterface: (Any, Any, Any, Any, Any) -> Unit): Int {
+    fun addTrackNotificationListener(trackNotificationListenerInterface: (String, String, Map<String, String>, Map<String,*>,LogEvent) -> Unit): Int {
         return if (trackNotificationListenerInterface is TrackNotificationListener) {
             addNotificationListener(NotificationType.Activate, trackNotificationListenerInterface as NotificationListener)
         } else {

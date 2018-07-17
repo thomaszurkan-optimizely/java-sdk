@@ -35,7 +35,7 @@ import com.optimizely.ab.config.ProjectConfigTestUtils.verifyProjectConfig
  */
 class GsonConfigParserTest {
 
-    @Rule
+    @get:Rule
     var thrown = ExpectedException.none()
 
     @Test

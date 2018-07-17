@@ -151,7 +151,7 @@ open class Bucketer(private val projectConfig: ProjectConfig) {
     @VisibleForTesting
     internal open fun generateBucketValue(hashCode: Int): Int {
         // map the hashCode into the range [0, BucketAlgorithm.MAX_TRAFFIC_VALUE)
-        val ratio = (hashCode and 0xFFFFFFFFL as Int).toDouble() / Math.pow(2.0, 32.0)
+        val ratio = (hashCode.toLong() and 0xFFFFFFFFL as Long).toDouble() / Math.pow(2.0, 32.0)
         return Math.floor(MAX_TRAFFIC_VALUE * ratio).toInt()
     }
 

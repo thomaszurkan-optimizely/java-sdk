@@ -53,11 +53,11 @@ import org.mockito.Mockito.mock
 @SuppressFBWarnings("URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD")
 class OptimizelyBuilderTest {
 
-    @Rule
-    var thrown = ExpectedException.none()
+    @get:Rule
+    public var thrown = ExpectedException.none()
 
-    @Rule
-    var rule = MockitoJUnit.rule()
+    @get:Rule
+    public var rule = MockitoJUnit.rule()
 
     @Mock private val mockEventHandler: EventHandler? = null
 

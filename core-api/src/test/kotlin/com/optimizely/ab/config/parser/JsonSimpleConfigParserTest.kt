@@ -36,7 +36,7 @@ import com.optimizely.ab.config.ProjectConfigTestUtils.verifyProjectConfig
  */
 class JsonSimpleConfigParserTest {
 
-    @Rule
+    @get:Rule
     var thrown = ExpectedException.none()
 
     @Test

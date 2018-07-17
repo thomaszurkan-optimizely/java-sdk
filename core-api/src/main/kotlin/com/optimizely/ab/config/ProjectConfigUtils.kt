@@ -60,7 +60,12 @@ object ProjectConfigUtils {
                 val variation = experiment.variations[0]
                 if (variation.liveVariableUsageInstances != null) {
                     for (usageInstance in variation.liveVariableUsageInstances) {
-                        var experimentsUsingVariable: MutableList<Experiment>? = ArrayList(variableIdToExperiments[usageInstance.id])
+
+                        var experimentsUsingVariable: MutableList<Experiment>? = null;
+
+                        if (variableIdToExperiments[usageInstance.id] != null) {
+                            experimentsUsingVariable = ArrayList(variableIdToExperiments[usageInstance.id])
+                        }
                         if (experimentsUsingVariable == null) {
                             experimentsUsingVariable = ArrayList()
                         }

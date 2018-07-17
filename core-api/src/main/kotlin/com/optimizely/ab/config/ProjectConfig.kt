@@ -101,7 +101,7 @@ class ProjectConfig// v4 constructor
      * whitelisting forcedVariations data structure in the Experiments class).
      */
     @Transient
-    val forcedVariationMapping = ConcurrentHashMap<String, ConcurrentHashMap<String, String>>()
+    val forcedVariationMapping:ConcurrentHashMap<String, ConcurrentHashMap<String, String>> = ConcurrentHashMap<String, ConcurrentHashMap<String, String>>()
 
     // v3 constructor
     @JvmOverloads constructor(accountId: String, projectId: String, version: String, revision: String, groups: List<Group>,
@@ -334,7 +334,7 @@ class ProjectConfig// v4 constructor
 
         val experimentToVariation: ConcurrentHashMap<String, String>
         if (!forcedVariationMapping.containsKey(userId)) {
-            (forcedVariationMapping as java.util.Map<String, ConcurrentHashMap<String, String>>).putIfAbsent(userId, ConcurrentHashMap())
+            (forcedVariationMapping as MutableMap<String, ConcurrentHashMap<*,*>>).putIfAbsent(userId, ConcurrentHashMap<Any, Any>())
         }
         experimentToVariation = forcedVariationMapping[userId]!!
 

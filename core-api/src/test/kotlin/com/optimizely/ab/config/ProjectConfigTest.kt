@@ -51,7 +51,7 @@ class ProjectConfigTest {
 
     private var projectConfig: ProjectConfig? = null
 
-    @Rule
+    @get:Rule
     var logbackVerifier = LogbackVerifier()
 
     @Before

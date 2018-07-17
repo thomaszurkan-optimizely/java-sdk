@@ -43,7 +43,7 @@ allprojects {
 
 subprojects {
     apply plugin: 'com.jfrog.bintray'
-    apply plugin: 'findbugs'
+    //apply plugin: 'findbugs'
     apply plugin: 'jacoco'
     apply plugin: 'java'
     apply plugin: 'maven-publish'
@@ -72,12 +72,12 @@ subprojects {
         archives javadocJar
     }
 
-    tasks.withType(FindBugs) {
-        reports {
-            xml.enabled = false
-            html.enabled = true
-        }
-    }
+//    tasks.withType(FindBugs) {
+//        reports {
+//            xml.enabled = false
+//            html.enabled = true
+//        }
+//    }
 
     test {
         useJUnit {
