@@ -173,7 +173,7 @@ class OptimizelyBuilderTest {
     @Throws(Exception::class)
     fun builderThrowsConfigParseExceptionForNullDatafile() {
         thrown.expect(ConfigParseException::class.java)
-        Optimizely.builder(null!!, mockEventHandler!!).build()
+        Optimizely.builder("", mockEventHandler!!).build()
     }
 
     @Test

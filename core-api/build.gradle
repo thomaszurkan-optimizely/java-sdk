@@ -10,7 +10,8 @@ dependencies {
     compileOnly group: 'org.json', name: 'json', version: jsonVersion, optional
     compileOnly group: 'com.googlecode.json-simple', name: 'json-simple', version: jsonSimpleVersion, optional
     compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion, optional
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    //compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 task generateVersionFile {

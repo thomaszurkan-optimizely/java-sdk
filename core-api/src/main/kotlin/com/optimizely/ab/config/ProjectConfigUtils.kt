@@ -91,7 +91,11 @@ object ProjectConfigUtils {
             for (variation in experiment.variations) {
                 if (variation.liveVariableUsageInstances != null) {
                     for (usageInstance in variation.liveVariableUsageInstances) {
-                        var liveVariableIdToValueMap: MutableMap<String, LiveVariableUsageInstance>? = HashMap(liveVariableValueMap[variation.id])
+
+                        var liveVariableIdToValueMap: MutableMap<String, LiveVariableUsageInstance>? = null
+                        if (liveVariableValueMap[variation.id] != null ) {
+                            liveVariableIdToValueMap = HashMap(liveVariableValueMap[variation.id])
+                        }
                         if (liveVariableIdToValueMap == null) {
                             liveVariableIdToValueMap = HashMap()
                         }

@@ -4073,7 +4073,7 @@ val spyOptimizely = spy(Optimizely.builder(validDatafile, mockEventHandler!!)
 assertNull(spyOptimizely.getFeatureVariableBoolean(
 featureKey,
 variableKey,
-null!!
+""
 ))
 
 logbackVerifier.expectMessage(

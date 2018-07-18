@@ -68,7 +68,7 @@ object SerializerTestUtils {
         val impression = EventBatch(accountId, Arrays.asList(vistor), false, projectId, revision)
         impression.projectId = projectId
         impression.accountId = accountId
-        impression.clientVersion = "0.1.1"
+        impression.clientVersion = "1"
         impression.anonymizeIp = true
         impression.revision = revision
 
@@ -85,6 +85,7 @@ object SerializerTestUtils {
     internal fun generateConversion(): EventBatch {
         val conversion = generateImpression()
         conversion.clientVersion = "0.1.1"
+        conversion.clientName = "java-sdk"
         conversion.anonymizeIp = true
         conversion.revision = revision
 

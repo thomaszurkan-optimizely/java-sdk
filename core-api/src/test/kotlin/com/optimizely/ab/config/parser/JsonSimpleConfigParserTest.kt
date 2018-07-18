@@ -115,6 +115,6 @@ class JsonSimpleConfigParserTest {
         thrown.expect(ConfigParseException::class.java)
 
         val parser = JsonSimpleConfigParser()
-        parser.parseProjectConfig(null!!)
+        parser.parseProjectConfig("")
     }
 }

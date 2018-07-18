@@ -114,6 +114,6 @@ class JacksonConfigParserTest {
         thrown.expect(ConfigParseException::class.java)
 
         val parser = JacksonConfigParser()
-        parser.parseProjectConfig(null!!)
+        parser.parseProjectConfig("")
     }
 }

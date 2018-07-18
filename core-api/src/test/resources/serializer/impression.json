@@ -26,8 +26,8 @@
       ],
       "attributes": [
         {
-          "entity_id": "6",
           "type": "custom",
+          "entity_id": "6",
           "value": "testfeaturevalue",
           "key": "testfeature"
         }
@@ -35,8 +35,8 @@
       "visitor_id": "testvisitor"
     }
   ],
-  "client_name": "java-sdk",
-  "client_version": "0.1.1",
+  "client_name": "1",
+  "client_version": "1",
   "anonymize_ip": true,
   "project_id": "1",
   "revision": "1"

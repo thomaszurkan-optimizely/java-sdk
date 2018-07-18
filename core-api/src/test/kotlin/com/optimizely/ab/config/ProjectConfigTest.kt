@@ -24,7 +24,6 @@ import com.optimizely.ab.config.audience.OrCondition
 import com.optimizely.ab.config.audience.UserAttribute
 
 import java.util.ArrayList
-import java.util.Collections
 import java.util.HashMap
 
 import java.util.Arrays.asList
@@ -232,14 +231,14 @@ class ProjectConfigTest {
     @Test
     @SuppressFBWarnings("NP")
     fun setForcedVariationNullUserId() {
-        val b = projectConfig!!.setForcedVariation("etag1", null!!, "vtag1")
+        val b = projectConfig!!.setForcedVariation("etag1", "", "vtag1")
         assertFalse(b)
     }
 
     @Test
     @SuppressFBWarnings("NP")
     fun getForcedVariationNullUserId() {
-        assertNull(projectConfig!!.getForcedVariation("etag1", null!!))
+        assertNull(projectConfig!!.getForcedVariation("etag1", ""))
     }
 
     @Test
@@ -256,13 +255,13 @@ class ProjectConfigTest {
     @Test
     @SuppressFBWarnings("NP")
     fun setForcedVariationNullExperimentKey() {
-        assertFalse(projectConfig!!.setForcedVariation(null!!, "testUser1", "vtag1"))
+        assertFalse(projectConfig!!.setForcedVariation("", "testUser1", "vtag1"))
     }
 
     @Test
     @SuppressFBWarnings("NP")
     fun getForcedVariationNullExperimentKey() {
-        assertNull(projectConfig!!.getForcedVariation(null!!, "testUser1"))
+        assertNull(projectConfig!!.getForcedVariation("", "testUser1"))
     }
 
     @Test
@@ -301,7 +300,7 @@ class ProjectConfigTest {
 
     @Test
     fun setForcedVariationEmptyVariationKey() {
-        assertFalse(projectConfig!!.setForcedVariation("etag1", "testUser1", ""))
+        assertFalse(projectConfig!!.setForcedVariation("etag1", "testUser1", null))
     }
 
     /* Multiple set calls (set only */

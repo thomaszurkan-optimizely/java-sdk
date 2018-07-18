@@ -26,8 +26,8 @@
       ],
       "attributes": [
         {
-          "entity_id": "6",
           "type": "custom",
+          "entity_id": "6",
           "value": "testfeaturevalue",
           "key": "testfeature"
         }

@@ -114,6 +114,6 @@ class GsonConfigParserTest {
         thrown.expect(ConfigParseException::class.java)
 
         val parser = GsonConfigParser()
-        parser.parseProjectConfig(null!!)
+        parser.parseProjectConfig("")
     }
 }

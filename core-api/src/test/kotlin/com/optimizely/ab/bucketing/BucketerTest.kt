@@ -366,7 +366,7 @@ class BucketerTest {
         val groupExperiment = groupExperiments[0]
 
         try {
-            algorithm.bucket(groupExperiment, null!!)
+            algorithm.bucket(groupExperiment, "")
         } catch (e: IllegalArgumentException) {
             assertNotNull(e)
         }

@@ -60,7 +60,7 @@
     {
       "id": "119",
       "key": "etag3",
-      "status": null,
+      "status": "Not started",
       "layerId": "2",
       "audienceIds": [
         "100"
