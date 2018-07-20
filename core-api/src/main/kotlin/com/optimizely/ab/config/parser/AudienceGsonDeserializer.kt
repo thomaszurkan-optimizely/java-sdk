@@ -50,10 +50,8 @@ class AudienceGsonDeserializer : JsonDeserializer<Audience> {
         val name = jsonObject.get("name").asString
 
         val conditionsElement = parser.parse(jsonObject.get("conditions").asString)
-        val anyListType = object : TypeToken<List<*>>() {}.type
 
-
-        val rawObjectList = gson.fromJson<List<*>>(conditionsElement, anyListType)
+        val rawObjectList = gson.fromJson<List<Condition>>(conditionsElement, List::class.java)
         val conditions = parseConditions(rawObjectList)
 
         return Audience(id, name, conditions)

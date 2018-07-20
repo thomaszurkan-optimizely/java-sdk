@@ -54,10 +54,10 @@ interface UserProfileService {
     companion object {
 
         /** The key for the user ID. Returns a String. */
-        val userIdKey = "user_id"
+        const val userIdKey = "user_id"
         /** The key for the decisions Map. Returns a `Map<String, Map<String, String>>`. */
-        val experimentBucketMapKey = "experiment_bucket_map"
+        const val experimentBucketMapKey = "experiment_bucket_map"
         /** The key for the variation Id within a decision Map.  */
-        val variationIdKey = "variation_id"
+        const val variationIdKey = "variation_id"
     }
 }

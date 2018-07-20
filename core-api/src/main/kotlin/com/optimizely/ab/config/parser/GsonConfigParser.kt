@@ -46,7 +46,7 @@ internal class GsonConfigParser : ConfigParser {
                 .create()
 
         try {
-            return gson.fromJson(json, ProjectConfig::class.java!!)
+            return gson.fromJson(json, ProjectConfig::class.java)
         } catch (e: Exception) {
             throw ConfigParseException("Unable to parse datafile: " + json, e)
         }

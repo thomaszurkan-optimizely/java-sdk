@@ -34,6 +34,7 @@ import com.optimizely.ab.event.internal.payload.Decision
 import com.optimizely.ab.event.internal.payload.EventBatch
 import com.optimizely.ab.internal.ControlAttribute
 import com.optimizely.ab.internal.ReservedEventKey
+import com.optimizely.ab.event.ClientEngine
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -129,7 +130,7 @@ class EventBuilderTest(private val datafileVersion: Int,
                 `is`(activatedExperiment.layerId))
         assertThat(eventBatch.accountId, `is`(validProjectConfig.accountId))
         //assertThat<List<Attribute>>(eventBatch.visitors[0].attributes!, `is`<List<Attribute>>(expectedUserFeatures))
-        assertThat(eventBatch.clientName, `is`(EventBatch.ClientEngine.JAVA_SDK.clientEngineValue))
+        assertThat(eventBatch.clientName, `is`(ClientEngine.JAVA_SDK.clientEngineValue))
         assertThat(eventBatch.clientVersion, `is`(BuildVersionInfo.VERSION))
         assertNull(eventBatch.visitors[0].sessionId)
     }
@@ -181,7 +182,7 @@ class EventBuilderTest(private val datafileVersion: Int,
                 `is`(activatedExperiment.layerId))
         assertThat(eventBatch.accountId, `is`(validProjectConfig.accountId))
         //assertThat<List<Attribute>>(eventBatch.visitors[0].attributes!!, `is`<List<Attribute>>(expectedUserFeatures))
-        assertThat(eventBatch.clientName, `is`(EventBatch.ClientEngine.JAVA_SDK.clientEngineValue))
+        assertThat(eventBatch.clientName, `is`(ClientEngine.JAVA_SDK.clientEngineValue))
         assertThat(eventBatch.clientVersion, `is`(BuildVersionInfo.VERSION))
         assertNull(eventBatch.visitors[0].sessionId)
     }
@@ -217,7 +218,7 @@ class EventBuilderTest(private val datafileVersion: Int,
     @Test
     @Throws(Exception::class)
     fun createImpressionEventAndroidClientEngineClientVersion() {
-        val builder = EventBuilder(EventBatch.ClientEngine.ANDROID_SDK, "0.0.0")
+        val builder = EventBuilder(ClientEngine.ANDROID_SDK, "0.0.0")
         val projectConfig = validProjectConfigV2()
         val activatedExperiment = projectConfig.experiments[0]
         val bucketedVariation = activatedExperiment.variations[0]
@@ -229,7 +230,7 @@ class EventBuilderTest(private val datafileVersion: Int,
                 userId, attributeMap)
         val impression = gson.fromJson<EventBatch>(impressionEvent.body, EventBatch::class.java!!)
 
-        assertThat(impression.clientName, `is`(EventBatch.ClientEngine.ANDROID_SDK.clientEngineValue))
+        assertThat(impression.clientName, `is`(ClientEngine.ANDROID_SDK.clientEngineValue))
         assertThat(impression.clientVersion, `is`("0.0.0"))
     }
 
@@ -241,7 +242,7 @@ class EventBuilderTest(private val datafileVersion: Int,
     @Throws(Exception::class)
     fun createImpressionEventAndroidTVClientEngineClientVersion() {
         val clientVersion = "0.0.0"
-        val builder = EventBuilder(EventBatch.ClientEngine.ANDROID_TV_SDK, clientVersion)
+        val builder = EventBuilder(ClientEngine.ANDROID_TV_SDK, clientVersion)
         val projectConfig = validProjectConfigV2()
         val activatedExperiment = projectConfig.experiments[0]
         val bucketedVariation = activatedExperiment.variations[0]
@@ -253,7 +254,7 @@ class EventBuilderTest(private val datafileVersion: Int,
                 userId, attributeMap)
         val impression = gson.fromJson<EventBatch>(impressionEvent.body, EventBatch::class.java!!)
 
-        assertThat(impression.clientName, `is`(EventBatch.ClientEngine.ANDROID_TV_SDK.clientEngineValue))
+        assertThat(impression.clientName, `is`(ClientEngine.ANDROID_TV_SDK.clientEngineValue))
         assertThat(impression.clientVersion, `is`(clientVersion))
     }
 
@@ -351,7 +352,7 @@ class EventBuilderTest(private val datafileVersion: Int,
         assertTrue(conversion.visitors[0].snapshots[0].events[0].tags == eventTagMap)
         assertFalse(conversion.visitors[0].snapshots[0].decisions[0].isCampaignHoldback)
         assertEquals(conversion.anonymizeIp, validProjectConfig.anonymizeIP)
-        assertEquals(conversion.clientName, EventBatch.ClientEngine.JAVA_SDK.clientEngineValue)
+        assertEquals(conversion.clientName, ClientEngine.JAVA_SDK.clientEngineValue)
         assertEquals(conversion.clientVersion, BuildVersionInfo.VERSION)
     }
 
@@ -456,7 +457,7 @@ class EventBuilderTest(private val datafileVersion: Int,
         assertTrue(conversion.visitors[0].snapshots[0].events[0].tags == eventTagMap)
         assertFalse(conversion.visitors[0].snapshots[0].decisions[0].isCampaignHoldback)
         assertEquals(conversion.anonymizeIp, validProjectConfig.anonymizeIP)
-        assertEquals(conversion.clientName, EventBatch.ClientEngine.JAVA_SDK.clientEngineValue)
+        assertEquals(conversion.clientName, ClientEngine.JAVA_SDK.clientEngineValue)
         assertEquals(conversion.clientVersion, BuildVersionInfo.VERSION)
     }
 
@@ -611,7 +612,7 @@ class EventBuilderTest(private val datafileVersion: Int,
     @Test
     @Throws(Exception::class)
     fun createConversionEventAndroidClientEngineClientVersion() {
-        val builder = EventBuilder(EventBatch.ClientEngine.ANDROID_SDK, "0.0.0")
+        val builder = EventBuilder(ClientEngine.ANDROID_SDK, "0.0.0")
         val attribute = validProjectConfig.attributes[0]
         val eventType = validProjectConfig.eventTypes[0]
 
@@ -645,7 +646,7 @@ class EventBuilderTest(private val datafileVersion: Int,
 
         val conversion = gson.fromJson<EventBatch>(conversionEvent!!.body, EventBatch::class.java!!)
 
-        assertThat(conversion.clientName, `is`(EventBatch.ClientEngine.ANDROID_SDK.clientEngineValue))
+        assertThat(conversion.clientName, `is`(ClientEngine.ANDROID_SDK.clientEngineValue))
         assertThat(conversion.clientVersion, `is`("0.0.0"))
     }
 
@@ -657,7 +658,7 @@ class EventBuilderTest(private val datafileVersion: Int,
     @Throws(Exception::class)
     fun createConversionEventAndroidTVClientEngineClientVersion() {
         val clientVersion = "0.0.0"
-        val builder = EventBuilder(EventBatch.ClientEngine.ANDROID_TV_SDK, clientVersion)
+        val builder = EventBuilder(ClientEngine.ANDROID_TV_SDK, clientVersion)
         val projectConfig = validProjectConfigV2()
         val attribute = projectConfig.attributes[0]
         val eventType = projectConfig.eventTypes[0]
@@ -686,7 +687,7 @@ class EventBuilderTest(private val datafileVersion: Int,
                 emptyMap<String, Any>())
         val conversion = gson.fromJson<EventBatch>(conversionEvent!!.body, EventBatch::class.java!!)
 
-        assertThat(conversion.clientName, `is`(EventBatch.ClientEngine.ANDROID_TV_SDK.clientEngineValue))
+        assertThat(conversion.clientName, `is`(ClientEngine.ANDROID_TV_SDK.clientEngineValue))
         assertThat(conversion.clientVersion, `is`(clientVersion))
     }
 
@@ -772,7 +773,7 @@ class EventBuilderTest(private val datafileVersion: Int,
         assertThat(impression.accountId, `is`(projectConfig.accountId))
 
         //assertThat<List<Attribute>>(impression.visitors[0].attributes!!, `is`<List<Attribute>>(expectedUserFeatures))
-        assertThat(impression.clientName, `is`(EventBatch.ClientEngine.JAVA_SDK.clientEngineValue))
+        assertThat(impression.clientName, `is`(ClientEngine.JAVA_SDK.clientEngineValue))
         assertThat(impression.clientVersion, `is`(BuildVersionInfo.VERSION))
         assertNull(impression.visitors[0].sessionId)
     }
@@ -880,7 +881,7 @@ class EventBuilderTest(private val datafileVersion: Int,
         assertTrue(conversion.visitors[0].snapshots[0].events[0].tags == eventTagMap)
         assertFalse(conversion.visitors[0].snapshots[0].decisions[0].isCampaignHoldback)
         assertEquals(conversion.anonymizeIp, validProjectConfig.anonymizeIP)
-        assertEquals(conversion.clientName, EventBatch.ClientEngine.JAVA_SDK.clientEngineValue)
+        assertEquals(conversion.clientName, ClientEngine.JAVA_SDK.clientEngineValue)
         assertEquals(conversion.clientVersion, BuildVersionInfo.VERSION)
     }
 

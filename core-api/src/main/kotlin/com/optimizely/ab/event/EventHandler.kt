@@ -23,4 +23,5 @@ interface EventHandler {
 
     @Throws(Exception::class)
     fun dispatchEvent(logEvent: LogEvent)
+
 }

@@ -35,9 +35,11 @@ constructor(@param:JsonProperty("id") override val id: String,
 
     enum class VariableStatus private constructor(val variableStatus: String) {
         @SerializedName("active")
+        @JsonProperty("active")
         ACTIVE("active"),
 
         @SerializedName("archived")
+        @JsonProperty("archived")
         ARCHIVED("archived");
 
 
@@ -59,15 +61,19 @@ constructor(@param:JsonProperty("id") override val id: String,
 
     enum class VariableType private constructor(val variableType: String) {
         @SerializedName("boolean")
+        @JsonProperty("boolean")
         BOOLEAN("boolean"),
 
         @SerializedName("integer")
+        @JsonProperty("integer")
         INTEGER("integer"),
 
         @SerializedName("string")
+        @JsonProperty("string")
         STRING("string"),
 
         @SerializedName("double")
+        @JsonProperty("double")
         DOUBLE("double");
 
 

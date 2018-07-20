@@ -235,7 +235,7 @@ internal class JsonSimpleConfigParser : ConfigParser {
             val attributeObject = obj as JSONObject
             val id = attributeObject["id"] as String
             val key = attributeObject["key"] as String
-            val segmentId = attributeObject["segmentId"] as String
+            val segmentId = attributeObject["segmentId"] as String?
 
             attributes.add(Attribute(id, key, segmentId))
         }
@@ -290,7 +290,7 @@ internal class JsonSimpleConfigParser : ConfigParser {
             } else {
                 val conditionMap = obj as JSONObject
                 conditions.add(UserAttribute(conditionMap["name"] as String, conditionMap["type"] as String,
-                        conditionMap["value"] as String))
+                        conditionMap["value"] as String?))
             }
         }
 
@@ -331,7 +331,7 @@ internal class JsonSimpleConfigParser : ConfigParser {
             val key = liveVariableObject["key"] as String
             val defaultValue = liveVariableObject["defaultValue"] as String
             val type = VariableType.fromString(liveVariableObject["type"] as String)
-            val status = VariableStatus.fromString(liveVariableObject["status"] as String)
+            val status = VariableStatus.fromString(liveVariableObject["status"] as String?)
 
             liveVariables.add(LiveVariable(id, key, defaultValue, status, type!!))
         }

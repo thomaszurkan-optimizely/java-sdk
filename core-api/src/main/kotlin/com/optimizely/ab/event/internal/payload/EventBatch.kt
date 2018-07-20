@@ -17,7 +17,7 @@
 package com.optimizely.ab.event.internal.payload
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.annotation.JsonValue
+import com.optimizely.ab.event.ClientEngine
 import com.optimizely.ab.event.internal.BuildVersionInfo
 
 class EventBatch(
@@ -33,11 +33,4 @@ class EventBatch(
         @JsonProperty("project_id")
         var projectId: String? = null,
         var revision: String? = null
-) {
-    enum class ClientEngine private constructor(val clientEngineValue: String) {
-        JAVA_SDK("java-sdk"),
-        ANDROID_SDK("android-sdk"),
-        ANDROID_TV_SDK("android-tv-sdk")
-    }
-
-}
+)

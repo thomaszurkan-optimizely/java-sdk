@@ -25,7 +25,7 @@ import com.optimizely.ab.error.NoOpErrorHandler
 import com.optimizely.ab.event.EventHandler
 import com.optimizely.ab.event.internal.BuildVersionInfo
 import com.optimizely.ab.event.internal.EventBuilder
-import com.optimizely.ab.event.internal.payload.EventBatch.ClientEngine
+import com.optimizely.ab.event.ClientEngine
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings
 import org.junit.BeforeClass
 import org.junit.Rule
@@ -126,7 +126,7 @@ class OptimizelyBuilderTest {
         val optimizelyClient = Optimizely.builder(validConfigJsonV2(), mockEventHandler!!)
                 .build()
 
-        assertThat<EventBatch.ClientEngine>((optimizelyClient.eventBuilder as EventBuilder).clientEngine, `is`(ClientEngine.JAVA_SDK))
+        assertThat<ClientEngine>((optimizelyClient.eventBuilder as EventBuilder).clientEngine, `is`(ClientEngine.JAVA_SDK))
     }
 
     @Test
@@ -136,7 +136,7 @@ class OptimizelyBuilderTest {
                 .withClientEngine(ClientEngine.ANDROID_SDK)
                 .build()
 
-        assertThat<EventBatch.ClientEngine>((optimizelyClient.eventBuilder as EventBuilder).clientEngine, `is`(ClientEngine.ANDROID_SDK))
+        assertThat<ClientEngine>((optimizelyClient.eventBuilder as EventBuilder).clientEngine, `is`(ClientEngine.ANDROID_SDK))
     }
 
     @Test
@@ -146,7 +146,7 @@ class OptimizelyBuilderTest {
                 .withClientEngine(ClientEngine.ANDROID_TV_SDK)
                 .build()
 
-        assertThat<EventBatch.ClientEngine>((optimizelyClient.eventBuilder as EventBuilder).clientEngine, `is`(ClientEngine.ANDROID_TV_SDK))
+        assertThat<ClientEngine>((optimizelyClient.eventBuilder as EventBuilder).clientEngine, `is`(ClientEngine.ANDROID_TV_SDK))
     }
 
     @Test

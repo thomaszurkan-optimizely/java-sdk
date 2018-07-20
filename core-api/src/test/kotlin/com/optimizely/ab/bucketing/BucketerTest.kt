@@ -48,10 +48,10 @@ import org.junit.Assert.assertTrue
 @SuppressFBWarnings("URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD")
 class BucketerTest {
 
-    @Rule
+    @get:Rule
     var thrown = ExpectedException.none()
 
-    @Rule
+    @get:Rule
     var logbackVerifier = LogbackVerifier()
 
     /**

@@ -17,10 +17,11 @@
 package com.optimizely.ab.event.internal
 
 import com.optimizely.ab.annotations.VisibleForTesting
-import com.optimizely.ab.config.EventType
 import com.optimizely.ab.config.Experiment
 import com.optimizely.ab.config.ProjectConfig
 import com.optimizely.ab.config.Variation
+import com.optimizely.ab.event.ClientEngine
+import com.optimizely.ab.event.EventHandler
 import com.optimizely.ab.event.LogEvent
 import com.optimizely.ab.event.internal.payload.Attribute
 import com.optimizely.ab.event.internal.payload.Decision
@@ -32,15 +33,13 @@ import com.optimizely.ab.event.internal.serializer.DefaultJsonSerializer
 import com.optimizely.ab.event.internal.serializer.Serializer
 import com.optimizely.ab.internal.EventTagUtils
 import com.optimizely.ab.internal.ControlAttribute
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.util.ArrayList
 import java.util.Arrays
-import java.util.Collections
 import java.util.UUID
 
 class EventBuilder @JvmOverloads constructor(@VisibleForTesting
-                                             val clientEngine: EventBatch.ClientEngine = EventBatch.ClientEngine.JAVA_SDK, @VisibleForTesting
+                                             val clientEngine: ClientEngine = ClientEngine.JAVA_SDK, @VisibleForTesting
                                              val clientVersion: String = BuildVersionInfo.VERSION) {
 
     private val serializer: Serializer
@@ -64,7 +63,7 @@ class EventBuilder @JvmOverloads constructor(@VisibleForTesting
 
         val visitor = Visitor(userId, null, buildAttributeList(projectConfig, attributes), Arrays.asList(snapshot))
         val visitors = Arrays.asList(visitor)
-        val eventBatch = EventBatch( projectConfig.accountId, visitors, projectConfig.anonymizeIP, projectConfig.projectId, clientEngine.clientEngineValue, clientVersion, projectConfig.revision)
+        val eventBatch = EventBatch( projectConfig.accountId, visitors, projectConfig.anonymizeIP, projectConfig.projectId, this.clientEngine.clientEngineValue, clientVersion, projectConfig.revision)
         val payload = this.serializer.serialize(eventBatch)
         return LogEvent(LogEvent.RequestMethod.POST, EVENT_ENDPOINT, emptyMap<String, String>(), payload)
     }

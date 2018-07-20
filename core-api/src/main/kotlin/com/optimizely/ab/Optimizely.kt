@@ -20,12 +20,8 @@ import com.optimizely.ab.bucketing.Bucketer
 import com.optimizely.ab.bucketing.DecisionService
 import com.optimizely.ab.bucketing.FeatureDecision
 import com.optimizely.ab.bucketing.UserProfileService
-import com.optimizely.ab.config.Attribute
-import com.optimizely.ab.config.EventType
 import com.optimizely.ab.config.Experiment
-import com.optimizely.ab.config.FeatureFlag
 import com.optimizely.ab.config.LiveVariable
-import com.optimizely.ab.config.LiveVariableUsageInstance
 import com.optimizely.ab.config.ProjectConfig
 import com.optimizely.ab.config.Variation
 import com.optimizely.ab.config.parser.ConfigParseException
@@ -33,17 +29,13 @@ import com.optimizely.ab.config.parser.DefaultConfigParser
 import com.optimizely.ab.error.ErrorHandler
 import com.optimizely.ab.error.NoOpErrorHandler
 import com.optimizely.ab.event.EventHandler
-import com.optimizely.ab.event.LogEvent
 import com.optimizely.ab.event.internal.BuildVersionInfo
 import com.optimizely.ab.event.internal.EventBuilder
-import com.optimizely.ab.event.internal.payload.EventBatch.ClientEngine
-import com.optimizely.ab.internal.ControlAttribute
+import com.optimizely.ab.event.ClientEngine
 import com.optimizely.ab.notification.NotificationCenter
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import javax.annotation.concurrent.ThreadSafe
 import java.util.ArrayList
-import java.util.Collections
 import java.util.HashMap
 
 /**

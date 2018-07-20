@@ -32,7 +32,7 @@ import com.optimizely.ab.event.LogEvent.RequestMethod
  */
 class NoopEventHandlerTest {
 
-    @Rule
+    @get:Rule
     var logbackVerifier = LogbackVerifier()
 
     @Test

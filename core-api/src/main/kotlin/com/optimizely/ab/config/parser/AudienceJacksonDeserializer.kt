@@ -43,8 +43,7 @@ class AudienceJacksonDeserializer : JsonDeserializer<Audience>() {
 
         val id = node.get("id").textValue()
         val name = node.get("name").textValue()
-        val anyListType = object : TypeToken<List<*>>() {}.type.javaClass
-        val rawObjectList = mapper.readValue(node.get("conditions").textValue(),  anyListType) as List<*>
+        val rawObjectList = mapper.readValue(node.get("conditions").textValue(), List::class.java)
         val conditions = parseConditions(rawObjectList)
 
         return Audience(id, name, conditions)

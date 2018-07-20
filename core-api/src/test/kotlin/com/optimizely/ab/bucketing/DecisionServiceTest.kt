@@ -77,14 +77,14 @@ import org.mockito.Mockito.`when`
 
 class DecisionServiceTest {
 
-    @Rule
+    @get:Rule
     @SuppressFBWarnings("URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD")
     var rule = MockitoJUnit.rule()
 
     @Mock
     private val mockErrorHandler: ErrorHandler? = null
 
-    @Rule
+    @get:Rule
     var logbackVerifier = LogbackVerifier()
 
     //========= getVariation tests =========/
